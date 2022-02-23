@@ -46,9 +46,9 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 /**
  * @swagger
  * /user:
- *  get:
- *  description: Get all users
- *  responses:
+ *   get:
+ *     description: Get all users
+ *   responses:
  *     '200':
  *        description: A successful response
  */ 
@@ -93,19 +93,33 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
   })
 /**
  * @swagger
- * /user/:id:
+ * /user/{id}:
  *    put:
  *      description: Use to return all user
- *    parameters:
- *      - username: username,
- *      - password: password,
- *      - fullname: fullname,
- *        in: query
- *        description: Name of our user
- *        required: false
- *        schema:
- *          type: string
- *          format: string
+ *      parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Numeric ID of the user to retrieve.
+ *         schema:
+ *           type: integer
+ *       - in: body
+ *         name: user
+ *         description: The user to create.
+ *         schema:
+ *           type: object
+ *           required:
+ *             - userName
+ *           properties:
+ *             userName:
+ *               type: string
+ *               description: Username of the user.
+ *             firstName:
+ *               type: string
+ *               description: First name of the user.
+ *             lastName:
+ *               type: string
+ *               description: Last name of the user.
  *    responses:
  *      '201':
  *        description: Successfully created user
